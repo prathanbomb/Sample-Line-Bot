@@ -6,20 +6,32 @@ import json
 import sys
 
 BOT_NAME = "Bot"
+chatbot = ChatBot(BOT_NAME,
+    storage_adapter='chatterbot.storage.MongoDatabaseAdapter',
+    logic_adapters=[
+        'chatterbot.logic.BestMatch'
+    ],
+    filters=[
+        'chatterbot.filters.RepetitiveResponseFilter'
+    ],
+    database='chatterbot-database'
+)
 
-chatbot = ChatBot(
-                    BOT_NAME,
-                    storage_adapter='chatterbot.adapters.storage.MongoDatabaseAdapter',
-                    database="chatterbot-database",
-                    logic_adapters=[
-                      "chatterbot.adapters.logic.MathematicalEvaluation",
-                      "chatterbot.adapters.logic.TimeLogicAdapter",
-                      "chatterbot.adapters.logic.ClosestMatchAdapter"
-                    ],
-                    filters=[
-                      'chatterbot.filters.RepetitiveResponseFilter'
-                    ],
-                  )
+# BOT_NAME = "Bot"
+#
+# chatbot = ChatBot(
+#                     BOT_NAME,
+#                     storage_adapter='chatterbot.adapters.storage.MongoDatabaseAdapter',
+#                     database="chatterbot-database",
+#                     logic_adapters=[
+#                       "chatterbot.adapters.logic.MathematicalEvaluation",
+#                       "chatterbot.adapters.logic.TimeLogicAdapter",
+#                       "chatterbot.adapters.logic.ClosestMatchAdapter"
+#                     ],
+#                     filters=[
+#                       'chatterbot.filters.RepetitiveResponseFilter'
+#                     ],
+#                   )
 
 if len(sys.argv) < 2:
   sys.exit(0)
